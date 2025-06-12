@@ -8,19 +8,17 @@ from dotenv import load_dotenv
 load_dotenv()
 
 def send_email(rows, headers, news_articles):
-    """
-    Sends an HTML-formatted email containing a styled table of market data and top news articles.
-    """
-    # Format the table as HTML
+    
+    
     html_table = tabulate(rows, headers=headers, tablefmt="html")
 
-    # Format news articles into an HTML list
+    
     news_html = "<h3>📰 Suggested Daily Reads</h3><ul>"
     for article in news_articles:
         news_html += f'<li><a href="{article["url"]}" target="_blank">{article["title"]}</a> — <em>{article["source"]}</em></li>'
     news_html += "</ul>"
 
-    # Full HTML content
+    
     html_content = f"""
     <html>
       <head>
@@ -57,9 +55,9 @@ def send_email(rows, headers, news_articles):
     </html>
     """
 
-    # Email parameters loaded from environment variables
+    
     sender_email = os.getenv("EMAIL_ADDRESS")
-    receiver_email = os.getenv("EMAIL_ADDRESS")  # or put another env var if receiver differs
+    receiver_email = os.getenv("EMAIL_ADDRESS")  
     password = os.getenv("EMAIL_PASSWORD")
 
     if not sender_email or not password:

@@ -4,21 +4,19 @@ import os
 import json
 from dotenv import load_dotenv
 
-load_dotenv()  # Load environment variables from .env file
+load_dotenv()  
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 HISTORY_FILE = "sent_articles.json"
 
-# Keywords to check for relevance
+
 ENERGY_KEYWORDS = [
     "energy", "oil", "gas", "electricity", "renewable", "power", 
     "natural gas", "fossil", "solar", "wind", "grid"
 ]
 
 def is_relevant(article):
-    """
-    Returns True if the article is relevant based on energy-related keywords.
-    """
+    
     text = f"{article.get('title', '')} {article.get('description', '')}".lower()
     return any(keyword in text for keyword in ENERGY_KEYWORDS)
 
@@ -78,7 +76,7 @@ def fetch_relevant_news():
             if len(new_articles) == 5:
                 break
 
-        # Update sent history
+        
         updated_urls = previously_sent.union([a["url"] for a in new_articles])
         save_sent_urls(updated_urls)
 
