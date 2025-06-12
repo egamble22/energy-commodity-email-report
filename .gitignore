@@ -1,4 +1,4 @@
 .venv
 sent_articles.json
 .env
-__pycache__
+_pycache_
